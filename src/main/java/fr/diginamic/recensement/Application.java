@@ -2,6 +2,7 @@ package fr.diginamic.recensement;
 
 import java.util.Scanner;
 
+import fr.diginamic.recensement.Exception.MessageException;
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.services.RechercheDepartementsPlusPeuplees;
 import fr.diginamic.recensement.services.RecherchePopulationBorneService;
@@ -54,11 +55,22 @@ public class Application {
 			switch (choix) {
 			case 1:
 				RecherchePopulationVilleService rechercheVille = new RecherchePopulationVilleService();
-				rechercheVille.traiter(recensement, scanner);
+				try {
+					rechercheVille.traiter(recensement, scanner);
+				} catch (MessageException e) {
+					e.printStackTrace();
+					System.err.println(e.getMessage()); 
+				}
 				break;
 			case 2:
 				RecherchePopulationDepartementService rechercheDept = new RecherchePopulationDepartementService();
-				rechercheDept.traiter(recensement, scanner);
+				try {
+					rechercheDept.traiter(recensement, scanner);
+				} catch (MessageException e) {
+				
+					e.printStackTrace();
+					System.err.println(e.getMessage()); 
+				}
 				break;
 			case 3:
 				RecherchePopulationRegionService rechercheRegion = new RecherchePopulationRegionService();
@@ -66,7 +78,12 @@ public class Application {
 				break;
 			case 4:
 				RecherchePopulationBorneService recherchePopBorne = new RecherchePopulationBorneService();
-				recherchePopBorne.traiter(recensement, scanner);
+				try {
+					recherchePopBorne.traiter(recensement, scanner);
+					
+				}catch(NumberFormatException | MessageException e){
+					System.err.println(e.getMessage()); 
+				}
 				break;
 			case 5:
 				RechercheVillesPlusPeupleesDepartement rechercheVillesPlusPeupleesDepartement = new RechercheVillesPlusPeupleesDepartement();
